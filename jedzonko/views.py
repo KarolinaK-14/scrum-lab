@@ -1,17 +1,27 @@
 from datetime import datetime
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 
 from .models import Recipe
 
 
+class LandingPage(View):
+    def get(self, request):
+        return render(request, "index.html")
+
+
 class IndexView(View):
 
     def get(self, request):
         ctx = {"actual_date": datetime.now()}
-        return render(request, "test.html", ctx)
+        return render(request, "index.html", ctx)
+
+
+class RecipeListView(View):
+
+    def get(self, request):
+        return render(request, "app-recipes.html")
 
 
 class AddRecipe(View):
@@ -29,19 +39,21 @@ class AddRecipe(View):
         preparation_time = request.POST.get('preparation_time')
         description_add = request.POST.get('description_add')
 
+
         if name !="" and ingredients !="" and description !="" and preparation_time !="" and description_add !="":
             description += f"\n{description_add}"
 
             recipe = Recipe(name=name, ingredients=ingredients, description=description, preparation_time=preparation_time)
             recipe.save()
-            
+
             # example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
             # return HttpResponse(example)
 
-            return render(request, 'app-recipes.html')
+            return redirect('recipe-list')
         
         error = {
             "error_msg": "wszystkie pola powinny być wypełnione!"
         }
 
         return render(request, 'app-add-recipe.html', error)
+
