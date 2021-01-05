@@ -35,8 +35,8 @@ class AddRecipe(View):
             recipe = Recipe(name=name, ingredients=ingredients, description=description, preparation_time=preparation_time)
             recipe.save()
             
-            example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
-            return HttpResponse(example)
+            # example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
+            # return HttpResponse(example)
 
             return render(request, 'app-recipes.html')
         
