@@ -14,25 +14,6 @@ class IndexView(View):
         return render(request, "test.html", ctx)
 
 
-# class Login(View):
-
-#     def get(self, request):
-#         return render(request, 'exercises/login.html')
-
-#     def post(self, request):
-#         name = request.POST.get('name')
-#         password = request.POST.get('password')
-#         try:
-#             User.objects.get(username = name, password = password)
-#             response = HttpResponse('Zalogowano')
-#             response.set_cookie("logged_in", "logged_in", max_age=24*60*60)
-#             return response
-#         except Exception:
-#             response = HttpResponse(f"Błąd logowania")
-#             response.delete_cookie("logged_in")
-#             return response
-
-
 class AddRecipe(View):
     """
     use it to add new Recipe
@@ -42,14 +23,22 @@ class AddRecipe(View):
         return render(request, 'app-add-recipe.html')
     
     def post(self, request):
-        new_recipe = Recipe()
-        new_recipe.name = request.POST.get('name')
-        new_recipe.ingredients = request.POST.get('ingredients')
-        new_recipe.description = request.POST.get('description')
-        new_recipe.preparation_time = request.POST.get('preparation_time')
-        new_recipe.save()
+        name = request.POST.get('name')
+        ingredients = request.POST.get('ingredients')
+        description = request.POST.get('description')
+        preparation_time = request.POST.get('preparation_time')
 
-        # example = f"{new_recipe.name}, {new_recipe.ingredients}, {new_recipe.description}, {new_recipe.preparation_time}"
-        # return HttpResponse(example)
+        if name !="" and ingredients !="" and description !="" and preparation_time !="":
+            recipe = Recipe(name=name, ingredients=ingredients, description=description, preparation_time=preparation_time)
+            recipe.save()
+            
+            # example = f"{new_recipe.name}, {new_recipe.ingredients}, {new_recipe.description}, {new_recipe.preparation_time}"
+            # return HttpResponse(example)
 
-        return render(request, 'app-recipes.html')
+            return render(request, 'app-recipes.html')
+        
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!"
+        }
+
+        return render(request, 'app-add-recipe.html', error)
