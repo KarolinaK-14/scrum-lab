@@ -21,7 +21,7 @@ Na przykład: `git checkout -b zadanie2.1/menu-boczne`
 Jeżeli chcesz dodać wszystkie zmienione pliki użyj `git add .`
 Pamiętaj że kropka na końcu jest ważna!
 Następnie skommituj zmiany komendą `git commit -m "nazwa_commita"`
-4. Wypchnij zmiany do repozytorium na GitHubie.  Użyj do tego komendy `git push origin main`
+4. Wypchnij zmiany do repozytorium na GitHubie.  Użyj do tego komendy `git push` (jeśli brakuje ustawienia "upstream branch", git podpowie jak to ustawić)
 5. Stwórz [*pull request*](https://help.github.com/articles/creating-a-pull-request) gdy skończysz zadanie.
 Jako `base` ustaw branch `main`, jako `compare` ustaw branch, który stworzyłeś w puncie `2`.
 6. Jeśli Twoje zmiany zostaną zaakceptowane przez resztę zespołu, wykonaj merge dołączając swoje zmiany
