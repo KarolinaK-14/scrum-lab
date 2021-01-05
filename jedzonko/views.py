@@ -7,6 +7,11 @@ from django.http import HttpResponse
 from .models import Recipe
 
 
+class LandingPage(View):
+    def get(self, request):
+        return render(request, "index.html")
+
+
 class IndexView(View):
 
     def get(self, request):
