@@ -1,8 +1,8 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-
 from .models import Recipe
 
 
@@ -48,10 +48,24 @@ class DashboardView(View):
 
 class RecipeListView(View):
     def get(self, request):
-        return render(request, "app-recipes.html")
+        recipe_list = Recipe.objects.all().order_by("-votes", "-created")
+        paginator = Paginator(recipe_list, 50)
+        page = request.GET.get('page')
+        recipes = paginator.get_page(page)
+        return render(request, "app-recipes.html", {"recipes": recipes})
 
 
-class AddRecipe(View):
+class RecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class ModifyRecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class AddRecipeView(View):
     """
     use it to add new Recipe
     """
