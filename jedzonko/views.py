@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
@@ -11,15 +10,16 @@ class LandingPage(View):
         return render(request, "index.html")
 
 
-class IndexView(View):
-
+class DashboardView(View):
     def get(self, request):
-        ctx = {"actual_date": datetime.now()}
-        return render(request, "index.html", ctx)
+        recipes = Recipe.objects.all().count()
+        context = {
+            "recipes_number": recipes
+        }
+        return render(request, "dashboard.html", context=context)
 
 
 class RecipeListView(View):
-
     def get(self, request):
         return render(request, "app-recipes.html")
 
@@ -38,7 +38,6 @@ class AddRecipe(View):
         description = request.POST.get('description')
         preparation_time = request.POST.get('preparation_time')
         description_add = request.POST.get('description_add')
-
 
         if name !="" and ingredients !="" and description !="" and preparation_time !="" and description_add !="":
             description += f"\n{description_add}"
