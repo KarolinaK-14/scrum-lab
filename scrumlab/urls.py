@@ -24,5 +24,5 @@ urlpatterns = [
     path('main/', v.DashboardView.as_view(), name='dashboard'),
     path('recipe/list/', v.RecipeListView.as_view(), name='recipe-list'),
     path('recipe/add/', v.AddRecipe.as_view()),
-    path('index/', v.IndexView.as_view()),
+    # path('index/', v.IndexView.as_view()),
 ]
