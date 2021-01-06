@@ -24,6 +24,12 @@ class RecipeListView(View):
         return render(request, "app-recipes.html")
 
 
+class DashboardView(View):
+
+    def get(self, request):
+        return render(request, "dashboard.html")
+
+
 class AddRecipe(View):
     """
     use it to add new Recipe
@@ -55,4 +61,3 @@ class AddRecipe(View):
         }
 
         return render(request, 'app-add-recipe.html', error)
-
