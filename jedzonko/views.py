@@ -12,7 +12,6 @@ class LandingPage(View):
         name = request.GET.get('name')
         description = request.GET.get('description')
 
-
         recipe = Recipe.objects.all()
         recipe_list = list(recipe)
         random.shuffle(recipe_list)
@@ -38,10 +37,6 @@ class LandingPage(View):
         return render(request, "index.html", ctx)
 
 
-
-
-
-
 class DashboardView(View):
     def get(self, request):
         recipes = Recipe.objects.all().count()
@@ -54,12 +49,6 @@ class DashboardView(View):
 class RecipeListView(View):
     def get(self, request):
         return render(request, "app-recipes.html")
-
-
-class DashboardView(View):
-
-    def get(self, request):
-        return render(request, "dashboard.html")
 
 
 class AddRecipe(View):
