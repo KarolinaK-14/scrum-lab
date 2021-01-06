@@ -82,3 +82,17 @@ class AddRecipe(View):
         }
 
         return render(request, 'app-add-recipe.html', error)
+
+
+class PlanView(View):
+    def get(self, request):
+        return render(request, "app-schedules.html")
+
+class AddPlanView(View):
+    def get(self, request):
+        return render(request, "app-add-schedules.html")
+
+    def post(self, request):
+        return redirect('plan-add')
+
+
