@@ -1,8 +1,8 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-
 from .models import Recipe
 
 
@@ -46,10 +46,23 @@ class DashboardView(View):
         return render(request, "dashboard.html", context=context)
 
 
-
 class RecipeListView(View):
     def get(self, request):
-        return render(request, "app-recipes.html")
+        recipe_list = Recipe.objects.all().order_by("-votes", "-created")
+        paginator = Paginator(recipe_list, 50)
+        page = request.GET.get('page')
+        recipes = paginator.get_page(page)
+        return render(request, "app-recipes.html", {"recipes": recipes})
+
+
+class RecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class ModifyRecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
 
 
 class AddRecipeView(View):
@@ -85,42 +98,24 @@ class AddRecipeView(View):
         return render(request, 'app-add-recipe.html', error)
 
 
-class RecipeView(View):
-    def get(self, request, recipe_id):
-        return HttpResponse()
-
-
-class ModifyRecipeView(View):
-    def get(self, request, recipe_id):
-        return HttpResponse()
-
-
 class PlanListView(View):
     def get(self, request):
         return HttpResponse()
 
 
 class PlanView(View):
-    def get(self, request, plan_id):
-        return HttpResponse()
-
-
-class AddPlanView(View):
-    def get(self, request):
-        return HttpResponse()
-
-
-class PlanAddRecipeView(View):
-    def get(self, request):
-        return HttpResponse()
-=======
-class PlanView(View):
     def get(self, request):
         return render(request, "app-schedules.html")
+
 
 class AddPlanView(View):
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('plan-add')
+        return redirect('add-plan')
+
+
+class PlanAddRecipeView(View):
+    def get(self, request):
+        return HttpResponse()
