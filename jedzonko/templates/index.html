@@ -17,7 +17,7 @@
 <body>
     <header class="page-header">
         <nav class="navbar navbar-expand-lg justify-content-around">
-            <a href="/" class="navbar-brand main-logo">
+            <a href="{% url 'dashboard' %}" class="navbar-brand main-logo">
                 Zaplanuj <span>Jedzonko</span>
             </a>
             <ul class="nav nounderline text-uppercase">
@@ -48,27 +48,24 @@
                 <div class="carousel-item active">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Lorem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            <h1>{{ name_1 }}</h1>
+                            <h3> {{ description_1 }}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Torem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            <h1>{{ name_2 }}</h1>
+                            <h3> {{ description_2 }}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Borem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            <h1>{{ name_3 }}</h1>
+                            <h3> {{ description_3 }}</h3>
                         </div>
                     </div>
                 </div>
