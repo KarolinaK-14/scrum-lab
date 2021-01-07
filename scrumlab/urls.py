@@ -27,4 +27,6 @@ urlpatterns = [
     path('recipe/modify/<int:recipe_id>/', v.ModifyRecipeView.as_view(), name='modify-recipe'),
     path('recipe/add/', v.AddRecipeView.as_view(), name='add-recipe'),
     # path('index/', v.IndexView.as_view()),
+    path('plan/list/', v.PlanView.as_view()),
+    path('plan/add/', v.AddPlanView.as_view(), name='plan-add'),
 ]
