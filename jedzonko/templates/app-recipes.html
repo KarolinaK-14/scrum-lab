@@ -23,7 +23,7 @@
         <tbody class="text-color-lighter">
         {% for recipe in recipes %}
         <tr class="d-flex">
-            <th scope="row" class="col-1">{{ forloop.counter }}</th>
+            <th scope="row" class="col-1">{{ recipes.start_index|add:forloop.counter0 }}</th>
             <td class="col-2">
                 {{ recipe.name }} ({{ recipe.votes }})
             </td>
