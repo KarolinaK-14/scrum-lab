@@ -23,8 +23,8 @@ urlpatterns = [
     path('', v.LandingPage.as_view()),
     path('main/', v.DashboardView.as_view(), name='dashboard'),
     path('recipe/list/', v.RecipeListView.as_view(), name='recipe-list'),
-    path('recipe/add/', v.AddRecipe.as_view()),
-    # path('index/', v.IndexView.as_view()),
+    path('recipe/add/', v.AddRecipe.as_view(), name='recipe-add'),
     path('plan/list/', v.PlanView.as_view()),
     path('plan/add/', v.AddPlanView.as_view(), name='plan-add'),
+    path('recipe/<int:id>/', v.RecipeView.as_view()),
 ]
