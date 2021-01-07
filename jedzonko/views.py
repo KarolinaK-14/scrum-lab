@@ -6,7 +6,7 @@ import random
 from .models import Recipe
 
 
-class LandingPage(View):
+class LandingPageView(View):
     def get(self, request):
 
         name = request.GET.get('name')
@@ -46,12 +46,13 @@ class DashboardView(View):
         return render(request, "dashboard.html", context=context)
 
 
+
 class RecipeListView(View):
     def get(self, request):
         return render(request, "app-recipes.html")
 
 
-class AddRecipe(View):
+class AddRecipeView(View):
     """
     use it to add new Recipe
     """
@@ -84,6 +85,35 @@ class AddRecipe(View):
         return render(request, 'app-add-recipe.html', error)
 
 
+class RecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class ModifyRecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class PlanListView(View):
+    def get(self, request):
+        return HttpResponse()
+
+
+class PlanView(View):
+    def get(self, request, plan_id):
+        return HttpResponse()
+
+
+class AddPlanView(View):
+    def get(self, request):
+        return HttpResponse()
+
+
+class PlanAddRecipeView(View):
+    def get(self, request):
+        return HttpResponse()
+=======
 class PlanView(View):
     def get(self, request):
         return render(request, "app-schedules.html")
@@ -94,5 +124,3 @@ class AddPlanView(View):
 
     def post(self, request):
         return redirect('plan-add')
-
-
