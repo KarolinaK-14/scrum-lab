@@ -6,7 +6,7 @@ import random
 from .models import Recipe
 
 
-class LandingPage(View):
+class LandingPageView(View):
     def get(self, request):
 
         name = request.GET.get('name')
@@ -98,15 +98,24 @@ class AddRecipeView(View):
         return render(request, 'app-add-recipe.html', error)
 
 
+class PlanListView(View):
+    def get(self, request):
+        return HttpResponse()
+
+
 class PlanView(View):
     def get(self, request):
         return render(request, "app-schedules.html")
+
 
 class AddPlanView(View):
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('plan-add')
+        return redirect('add-plan')
 
 
+class PlanAddRecipeView(View):
+    def get(self, request):
+        return HttpResponse()
