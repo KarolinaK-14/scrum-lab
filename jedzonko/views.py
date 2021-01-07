@@ -121,18 +121,18 @@ class AddPlanView(View):
 
 
 class RecipeView(View):
-    def get (self, request, id):
+    def get (self, request, recipe_id):
         try:
-            recipe = Recipe.objects.get(id=id)
+            recipe = Recipe.objects.get(id=recipe_id)
         except Exception:
-            return redirect('recipe-add')
+            return redirect('add-recipe')
         context = {
-            'name' : recipe.name,
-            'ingredients' : recipe.ingredients,
-            'description' : recipe.description,
-            'preparation' : recipe.preparation,
-            'preparation_time' : recipe.preparation_time,
-            'votes' : recipe.votes,
+            'name': recipe.name,
+            'ingredients': recipe.ingredients,
+            'description': recipe.description,
+            'preparation': recipe.preparation,
+            'preparation_time': recipe.preparation_time,
+            'votes': recipe.votes,
         }
         return render(request, "app-recipe-details.html", context)
       
