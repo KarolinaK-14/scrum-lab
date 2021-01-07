@@ -1,12 +1,12 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-
 from .models import Recipe
 
 
-class LandingPage(View):
+class LandingPageView(View):
     def get(self, request):
 
         name = request.GET.get('name')
@@ -48,10 +48,24 @@ class DashboardView(View):
 
 class RecipeListView(View):
     def get(self, request):
-        return render(request, "app-recipes.html")
+        recipe_list = Recipe.objects.all().order_by("-votes", "-created")
+        paginator = Paginator(recipe_list, 50)
+        page = request.GET.get('page')
+        recipes = paginator.get_page(page)
+        return render(request, "app-recipes.html", {"recipes": recipes})
 
 
-class AddRecipe(View):
+class RecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class ModifyRecipeView(View):
+    def get(self, request, recipe_id):
+        return HttpResponse()
+
+
+class AddRecipeView(View):
     """
     use it to add new Recipe
     """
@@ -67,9 +81,13 @@ class AddRecipe(View):
         description_add = request.POST.get('description_add')
 
         if name !="" and ingredients !="" and description !="" and preparation_time !="" and description_add !="":
-            description += f"\n{description_add}"
 
-            recipe = Recipe(name=name, ingredients=ingredients, description=description, preparation_time=preparation_time)
+            recipe = Recipe(name=name,
+                ingredients=ingredients,
+                description=description,
+                preparation_time=preparation_time,
+                preparation=description_add,
+            )
             recipe.save()
 
             # example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
@@ -84,15 +102,42 @@ class AddRecipe(View):
         return render(request, 'app-add-recipe.html', error)
 
 
+class PlanListView(View):
+    def get(self, request):
+        return HttpResponse()
+
+
 class PlanView(View):
     def get(self, request):
         return render(request, "app-schedules.html")
+
 
 class AddPlanView(View):
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('plan-add')
+        return redirect('add-plan')
 
+
+class RecipeView(View):
+    def get (self, request, recipe_id):
+        try:
+            recipe = Recipe.objects.get(id=recipe_id)
+        except Exception:
+            return redirect('add-recipe')
+        context = {
+            'name': recipe.name,
+            'ingredients': recipe.ingredients,
+            'description': recipe.description,
+            'preparation': recipe.preparation,
+            'preparation_time': recipe.preparation_time,
+            'votes': recipe.votes,
+        }
+        return render(request, "app-recipe-details.html", context)
+      
+
+class PlanAddRecipeView(View):
+    def get(self, request):
+        return HttpResponse()
 
