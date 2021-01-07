@@ -81,9 +81,13 @@ class AddRecipeView(View):
         description_add = request.POST.get('description_add')
 
         if name !="" and ingredients !="" and description !="" and preparation_time !="" and description_add !="":
-            description += f"\n{description_add}"
 
-            recipe = Recipe(name=name, ingredients=ingredients, description=description, preparation_time=preparation_time)
+            recipe = Recipe(name=name,
+                ingredients=ingredients,
+                description=description,
+                preparation_time=preparation_time,
+                preparation=description_add,
+            )
             recipe.save()
 
             # example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
@@ -116,6 +120,24 @@ class AddPlanView(View):
         return redirect('add-plan')
 
 
+class RecipeView(View):
+    def get (self, request, id):
+        try:
+            recipe = Recipe.objects.get(id=id)
+        except Exception:
+            return redirect('recipe-add')
+        context = {
+            'name' : recipe.name,
+            'ingredients' : recipe.ingredients,
+            'description' : recipe.description,
+            'preparation' : recipe.preparation,
+            'preparation_time' : recipe.preparation_time,
+            'votes' : recipe.votes,
+        }
+        return render(request, "app-recipe-details.html", context)
+      
+
 class PlanAddRecipeView(View):
     def get(self, request):
         return HttpResponse()
+
