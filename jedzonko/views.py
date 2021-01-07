@@ -3,12 +3,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-from .models import Recipe
+from .models import Recipe, Plan
 
 
 class LandingPageView(View):
     def get(self, request):
-
         name = request.GET.get('name')
         description = request.GET.get('description')
 
@@ -32,7 +31,7 @@ class LandingPageView(View):
             "description_1": description_1,
             "description_2": description_2,
             "description_3": description_3
-            }
+        }
 
         return render(request, "index.html", ctx)
 
@@ -55,11 +54,6 @@ class RecipeListView(View):
         return render(request, "app-recipes.html", {"recipes": recipes})
 
 
-class RecipeView(View):
-    def get(self, request, recipe_id):
-        return HttpResponse()
-
-
 class ModifyRecipeView(View):
     def get(self, request, recipe_id):
         return HttpResponse()
@@ -69,10 +63,10 @@ class AddRecipeView(View):
     """
     use it to add new Recipe
     """
-    
+
     def get(self, request):
         return render(request, 'app-add-recipe.html')
-    
+
     def post(self, request):
         name = request.POST.get('name')
         ingredients = request.POST.get('ingredients')
@@ -80,21 +74,20 @@ class AddRecipeView(View):
         preparation_time = request.POST.get('preparation_time')
         description_add = request.POST.get('description_add')
 
-        if name !="" and ingredients !="" and description !="" and preparation_time !="" and description_add !="":
-
+        if name != "" and ingredients != "" and description != "" and preparation_time != "" and description_add != "":
             recipe = Recipe(name=name,
-                ingredients=ingredients,
-                description=description,
-                preparation_time=preparation_time,
-                preparation=description_add,
-            )
+                            ingredients=ingredients,
+                            description=description,
+                            preparation_time=preparation_time,
+                            preparation=description_add,
+                            )
             recipe.save()
 
             # example = f"{recipe.name}, {recipe.ingredients}, {recipe.description}, {recipe.preparation_time}"
             # return HttpResponse(example)
 
             return redirect('recipe-list')
-        
+
         error = {
             "error_msg": "wszystkie pola powinny być wypełnione!"
         }
@@ -117,11 +110,30 @@ class AddPlanView(View):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('add-plan')
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        created = request.POST.get('created')
+        recipes = request.POST.get('recipes')
+
+        if name != "" and description != "" and created != "" and recipes != "":
+            plan = Plan(name=name,
+                        description=description,
+                        created=created,
+                        recipes=recipes,
+                        )
+            plan.save()
+
+            return redirect('plan-list')
+
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!"
+        }
+
+        return render(request, "app-add-schedules.html", error)
 
 
 class RecipeView(View):
-    def get (self, request, recipe_id):
+    def get(self, request, recipe_id):
         try:
             recipe = Recipe.objects.get(id=recipe_id)
         except Exception:
@@ -135,9 +147,8 @@ class RecipeView(View):
             'votes': recipe.votes,
         }
         return render(request, "app-recipe-details.html", context)
-      
+
 
 class PlanAddRecipeView(View):
     def get(self, request):
         return HttpResponse()
-
