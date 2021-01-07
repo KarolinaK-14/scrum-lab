@@ -52,14 +52,16 @@
 
             {% for i in recipes.paginator.page_range %}
                 {% if recipes.number == i %}
-                    <span class="active">{{ i }}</span>
+                    <span class="disabled"><span style="color: #007bff">| </span>{{ i }}</span>
                 {% else %}
-                    <a href="?page={{ i }}">{{ i }}</a>
+                    <a href="?page={{ i }}">| {{ i }}</a>
                 {% endif %}
             {% endfor %}
 
             {% if recipes.has_next %}
-                <a href="?page={{ recipes.next_page_number }}">następna &gt;</a>
+                <a href="?page={{ recipes.next_page_number }}"> | następna &gt;</a>
+            {% else %}
+                <span style="color: #007bff">| </span>
             {% endif %}
         </span>
     </div>
