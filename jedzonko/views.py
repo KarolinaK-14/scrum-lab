@@ -53,7 +53,12 @@ class DashboardView(View):
         recipes = Recipe.objects.all().count()
         plans = Plan.objects.all()
         plans_count = plans.count()
-        last_plan = plans.order_by("-created")[0]
+
+        try:
+            last_plan = plans.order_by("-created")[0]
+        except IndexError:
+            return render(request, "dashboard.html", {"recipes_number": recipes, "plans_number": plans_count})
+
         last_plan_recipes = last_plan.recipeplan_set.all().order_by("order")
         unique_days = list({i.day_name for i in last_plan_recipes})
         day_name_list = DayName.values()
