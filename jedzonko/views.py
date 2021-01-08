@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-from .models import Recipe
+from .models import Recipe, Plan
 
 
 class LandingPageView(View):
@@ -40,8 +40,10 @@ class LandingPageView(View):
 class DashboardView(View):
     def get(self, request):
         recipes = Recipe.objects.all().count()
+        plans = Plan.objects.all().count()
         context = {
-            "recipes_number": recipes
+            "recipes_number": recipes,
+            "plans_number": plans
         }
         return render(request, "dashboard.html", context=context)
 
