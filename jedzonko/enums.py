@@ -13,3 +13,7 @@ class DayName(Enum):
     @classmethod
     def choices(cls):
         return tuple((i.name, i.value) for i in cls)
+
+    @classmethod
+    def values(cls):
+        return [i.value for i in cls]
