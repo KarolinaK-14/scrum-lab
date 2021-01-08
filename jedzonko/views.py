@@ -139,7 +139,11 @@ class RecipeView(View):
     
     def post (self, request, recipe_id):
         recipe = Recipe.objects.get(id=recipe_id)
-        recipe.votes += 1
+        if 'just_liked' in request.POST:
+            recipe.votes += 1
+        elif 'not_liked' in request.POST:
+            recipe.votes -= 1
+        
         recipe.save()
         return redirect('recipe', recipe_id)
 

@@ -43,10 +43,18 @@
                         {% csrf_token %}
                         <label for="id"></label>
                         <input type="hidden" name="id" value="{{id}}">
-                        <button type="submit"
-                        class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">
-                            Polub przepis!
-                        </button>
+                        <td>
+                            <button type="submit" name="just_liked"
+                            class="btn btn-color rounded-0 pt-0 pb-0 ">
+                                Lubię
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit" name="not_liked"
+                            class="btn btn-color rounded-0 pt-0 pb-0">
+                                Nie lubię
+                            </button>
+                        </td>
                     </form>
                 </td>
             </tr>
