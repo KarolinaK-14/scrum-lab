@@ -211,8 +211,10 @@ class PlanAddRecipeView(View):
         context = {
             "plans" : list(Plan.objects.all()),
             "recipes" : list(Recipe.objects.all()),
-            "error_msg" : f"plan_id: {plan_id}, meal_name: {meal_name}, meal_number: {meal_number}, recipe_id: {recipe_id}, day: {day}"
+            "error_msg" : "Wszystkie pola muszą być wypełnione"
         }
+
+        # context["error_msg"] = f"plan_id: {plan_id}, meal_name: {meal_name}, meal_number: {meal_number}, recipe_id: {recipe_id}, day: {day}"
 
         return render(request, "app-schedules-meal-recipe.html", context)
 
