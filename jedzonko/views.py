@@ -135,11 +135,28 @@ class PlanView(View):
 
 
 class AddPlanView(View):
+    """
+        use it to add new Plan
+    """
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('add-plan')
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if name != "" and description != "":
+            plan = Plan(name=name,
+                        description=description,
+                        )
+            plan.save()
+            return redirect('plan-list')
+
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!"
+        }
+
+        return render(request, 'app-add-schedules.html', error)
 
 
 class RecipeView(View):

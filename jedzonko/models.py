@@ -22,7 +22,7 @@ class Recipe(models.Model):
     votes = models.IntegerField(default=0)
 
 
-class Plan (models.Model):
+class Plan(models.Model):
     """
     - name: nazwa planu,
     - description: opis planu,
