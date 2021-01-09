@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.http import HttpResponse
 import random
@@ -85,7 +85,29 @@ class RecipeListView(View):
 
 class ModifyRecipeView(View):
     def get(self, request, recipe_id):
-        return HttpResponse()
+        recipe = get_object_or_404(Recipe, pk=recipe_id)
+        return render(request, "app-edit-recipe.html", {"recipe": recipe})
+
+    def post(self, request, recipe_id):
+        name = request.POST.get("name")
+        ingredients = request.POST.get("ingredients")
+        description = request.POST.get("description")
+        preparation = request.POST.get("preparation")
+        preparation_time = request.POST.get("preparation_time")
+
+        if name and ingredients and description and preparation and preparation_time:
+            new_recipe = Recipe.objects.create(name=name,
+                                               ingredients=ingredients,
+                                               description=description,
+                                               preparation=preparation,
+                                               preparation_time=preparation_time)
+            return redirect('recipe-list')
+
+        error = {
+            "error_msg": "Wypełnij poprawnie wszystkie pola",
+            "recipe": Recipe.objects.get(pk=recipe_id)
+        }
+        return render(request, 'app-edit-recipe.html', error)
 
 
 class AddRecipeView(View):
