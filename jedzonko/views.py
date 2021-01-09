@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-from .models import Recipe, Plan
+from .models import Recipe, Plan, RecipePlan
 from .enums import DayName
 
 
@@ -131,7 +131,27 @@ class PlanListView(View):
 
 class PlanView(View):
     def get(self, request, plan_id):
-        return render(request, "app-details-schedules.html")
+        try:
+            plan = Plan.objects.get(id=plan_id)
+        except Exception:
+            return redirect('add-plan')
+        rec_plan = RecipePlan.objects.all()
+
+        context = {
+            'name': plan.name,
+            'description': plan.description,
+
+            #'dayname_1': rec_plan.DayName.MONDAY, # do odkomentowania jak pojawi sie dodawanie obiektów modelu RecipePlan
+            #'dayname_2': rec_plan.DayName.TUESDAY,
+            #'dayname_3': rec_plan.DayName.WEDNESDAY,
+            #'dayname_4': rec_plan.DayName.THURSDAY,
+            #'dayname_5': rec_plan.DayName.FRIDAY,
+            #'dayname_6': rec_plan.DayName.SATURDAY,
+            #'dayname_7': rec_plan.DayName.SUNDAY,
+            #'meal_name': rec_plan.meal_name,
+            #'recipe': rec_plan.recipe,
+        }
+        return render(request, "app-details-schedules.html", context)
 
 
 class AddPlanView(View):
