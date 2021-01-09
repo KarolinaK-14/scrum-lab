@@ -193,7 +193,9 @@ class PlanAddRecipeView(View):
             meal_number = int(meal_number)
 
             recipe = Recipe.objects.get(id=recipe_id)
-            plan = Recipe.objects.get(id=plan_id)
+            plan = Plan.objects.get(id=plan_id)
+
+            # plan.recipes.add(recipe, trough_defaults = {'meal_name':meal_name, 'plan':plan, 'order':meal_number, 'day_name':day})
 
             recipe_plan = RecipePlan(
                 meal_name=meal_name,
