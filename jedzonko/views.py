@@ -126,20 +126,37 @@ class AddRecipeView(View):
 
 class PlanListView(View):
     def get(self, request):
-        return HttpResponse()
-
-
-class PlanView(View):
-    def get(self, request):
         return render(request, "app-schedules.html")
 
 
+class PlanView(View):
+    def get(self, request, plan_id):
+        return render(request, "app-details-schedules.html")
+
+
 class AddPlanView(View):
+    """
+        use it to add new Plan
+    """
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
     def post(self, request):
-        return redirect('add-plan')
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if name != "" and description != "":
+            plan = Plan(name=name,
+                        description=description,
+                        )
+            plan.save()
+            return redirect('plan-list')
+
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!"
+        }
+
+        return render(request, 'app-add-schedules.html', error)
 
 
 class RecipeView(View):
@@ -207,7 +224,7 @@ class PlanAddRecipeView(View):
 
             recipe_plan.save()
 
-            return redirect('dashboard')
+            return redirect('plan', plan_id)
 
 
         context = {
@@ -219,5 +236,3 @@ class PlanAddRecipeView(View):
         # context["error_msg"] = f"plan_id: {plan_id}, meal_name: {meal_name}, meal_number: {meal_number}, recipe_id: {recipe_id}, day: {day}"
 
         return render(request, "app-schedules-meal-recipe.html", context)
-
-

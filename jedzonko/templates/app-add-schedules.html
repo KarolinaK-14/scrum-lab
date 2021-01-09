@@ -2,25 +2,32 @@
 {% block content %}
 <div class="dashboard-content border-dashed p-3 m-4 view-height">
 
+<form action="" method="POST">
+    {% csrf_token %}
     <div class="row border-bottom border-3 p-1 m-1">
         <div class="col noPadding">
             <h3 class="color-header text-uppercase">NOWY PLAN</h3>
         </div>
+            <div class="color-header">
+                    {%if error_msg%}
+                        "{{error_msg}}"
+                    {%endif%}
+            </div>
         <div class="col d-flex justify-content-end mb-2 noPadding">
-            <a href="" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</a>
+            <button type="submit" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">
+                Zapisz
+            </button>
         </div>
     </div>
 
     <div class="schedules-content">
-        <form>
             <div class="form-group row">
                 <label for="planName"
                        class="col-sm-2 label-size col-form-label">
                     Nazwa planu
                 </label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="planName"
-                           placeholder="Nazwa planu">
+                    <input class="w-100 p-1" value="" name="name">
                 </div>
             </div>
             <div class="form-group row">
@@ -29,12 +36,12 @@
                     Opis planu
                 </label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="5" id="planDescription"
-                              placeholder="Opis planu"></textarea>
+                    <td class="col-7"><textarea class="w-100 p-1"
+                                            rows="5" name="description"></textarea></td>
                 </div>
             </div>
-        </form>
     </div>
+</form>
 </div>
 {% endblock content %}
 
