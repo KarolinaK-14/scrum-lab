@@ -126,12 +126,12 @@ class AddRecipeView(View):
 
 class PlanListView(View):
     def get(self, request):
-        return HttpResponse()
+        return render(request, "app-schedules.html")
 
 
 class PlanView(View):
-    def get(self, request):
-        return render(request, "app-schedules.html")
+    def get(self, request, plan_id):
+        return render(request, "app-details-schedules.html")
 
 
 class AddPlanView(View):
@@ -172,4 +172,4 @@ class RecipeView(View):
 
 class PlanAddRecipeView(View):
     def get(self, request):
-        return HttpResponse()
+        return render(request, "app-schedules-meal-recipe.html")

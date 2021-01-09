@@ -48,6 +48,16 @@
                                 <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
+                {%  block add-button %}
+                    {% if needed %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'plan-add-recipe' %}">
+                                <span>Dodaj przepis do planu</span>
+                                <i class="far fa-plus-square icon-plus-square"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endblock add-button %}
                         <!-- Podstrony związane z zarządzaniem użytkownikami
                         <li class="nav-item">
                             <a class="nav-link" href="">
