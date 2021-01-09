@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 import random
-from .models import Recipe, Plan
+from .models import Recipe, Plan, RecipePlan
 from .enums import DayName
 
 
@@ -172,4 +172,48 @@ class RecipeView(View):
 
 class PlanAddRecipeView(View):
     def get(self, request):
-        return HttpResponse()
+        context = {
+            "plans" : list(Plan.objects.all()),
+            "recipes" : list(Recipe.objects.all()),
+        }
+
+        return render(request, "app-schedules-meal-recipe.html", context)
+    
+    def post(self, request):
+        plan_id = request.POST.get('choosePlan')
+        meal_name = request.POST.get('name')
+        meal_number = request.POST.get('number')
+        recipe_id = request.POST.get('recipe_id')
+        day = request.POST.get('day')
+
+        if plan_id and meal_name and meal_number and recipe_id and day:
+
+            plan_id = int(plan_id)
+            recipe_id = int(recipe_id)
+            meal_number = int(meal_number)
+
+            recipe = Recipe.objects.get(id=recipe_id)
+            plan = Recipe.objects.get(id=plan_id)
+
+            recipe_plan = RecipePlan(
+                meal_name=meal_name,
+                recipe=recipe,
+                plan=plan,
+                order=meal_number,
+                day_name=day
+            )
+
+            recipe_plan.save()
+
+            return redirect('dashboard')
+
+
+        context = {
+            "plans" : list(Plan.objects.all()),
+            "recipes" : list(Recipe.objects.all()),
+            "error_msg" : f"plan_id: {plan_id}, meal_name: {meal_name}, meal_number: {meal_number}, recipe_id: {recipe_id}, day: {day}"
+        }
+
+        return render(request, "app-schedules-meal-recipe.html", context)
+
+
