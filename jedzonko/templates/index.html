@@ -45,30 +45,16 @@
     <section class="padding-large bg-light">
         <div id="carouselExampleControls" class="carousel slide main-slider" data-ride="carousel">
             <div class="carousel-inner container">
-                <div class="carousel-item active">
-                    <div class="container w-75 d-flex">
+                {% for recipe in recipes %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="container w-100 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>{{ name_1 }}</h1>
-                            <h3> {{ description_1 }}</h3>
+                            <h1>{% if recipe.name %}{{ recipe.name }}{% else %}{{ empty_info_name}}{% endif %}</h1>
+                            <h3>{% if recipe.description %}{{ recipe.description }}{% else %}{{ empty_info_description}}{% endif %}</h3>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="container w-75 d-flex">
-                        <div class="carousel-caption d-block">
-                            <h1>{{ name_2 }}</h1>
-                            <h3> {{ description_2 }}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container w-75 d-flex">
-                        <div class="carousel-caption d-block">
-                            <h1>{{ name_3 }}</h1>
-                            <h3> {{ description_3 }}</h3>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

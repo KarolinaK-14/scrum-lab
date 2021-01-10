@@ -15,35 +15,15 @@ class LandingPageView(View):
 
         EMPTY_INFO = ("Tu może być twój przepis", "aby dodać przepis, przejdź do listy przepisów")
 
+        recipes_carousel = recipe_list[:3]
+        while len(recipes_carousel) < 3:
+            recipes_carousel.append(EMPTY_INFO)
+
         ctx = {
-            "name_1": EMPTY_INFO[0],
-            "name_2": EMPTY_INFO[0],
-            "name_3": EMPTY_INFO[0],
-            "description_1": EMPTY_INFO[1],
-            "description_2": EMPTY_INFO[1],
-            "description_3": EMPTY_INFO[1],
+            "recipes": recipes_carousel,
+            "empty_info_name": EMPTY_INFO[0],
+            "empty_info_description": EMPTY_INFO[1]
         }
-
-        if len(recipe_list) >= 1:
-            recipe_1 = recipe_list[0]
-            name_1 = recipe_1.name
-            description_1 = recipe_1.description
-            ctx["name_1"] = name_1
-            ctx["description_1"] = description_1
-
-            if len(recipe_list) >= 2:
-                recipe_2 = recipe_list[1]
-                name_2 = recipe_2.name
-                description_2 = recipe_2.description
-                ctx["name_2"] = name_2
-                ctx["description_2"] = description_2
-
-                if len(recipe_list) >= 3:
-                    recipe_3 = recipe_list[2]
-                    name_3 = recipe_3.name
-                    description_3 = recipe_3.description
-                    ctx["name_3"] = name_3
-                    ctx["description_3"] = description_3
 
         return render(request, "index.html", ctx)
 
