@@ -133,7 +133,20 @@ class PlanListView(View):
 
 class PlanView(View):
     def get(self, request, plan_id):
-        return render(request, "app-details-schedules.html")
+        plan = get_object_or_404(Plan, pk=plan_id)
+
+        plan_recipes = plan.recipeplan_set.all().order_by("order")
+        unique_days = list({i.day_name for i in plan_recipes})
+        day_name_list = DayName.values()
+        sorted_days_index = sorted([day_name_list.index(unique_days[i]) for i in range(len(unique_days))])
+        sorted_days_name = [day_name_list[i] for i in sorted_days_index]
+        context = {
+            "plan": plan,
+            "plan_recipes": plan_recipes,
+            "days": sorted_days_name
+            }
+        
+        return render(request, "app-details-schedules.html", context)
 
 
 class AddPlanView(View):
@@ -213,6 +226,7 @@ class PlanAddRecipeView(View):
 
             recipe = Recipe.objects.get(id=recipe_id)
             plan = Plan.objects.get(id=plan_id)
+            day_name = day
 
             # plan.recipes.add(recipe, trough_defaults = {'meal_name':meal_name, 'plan':plan, 'order':meal_number, 'day_name':day})
 
@@ -221,7 +235,7 @@ class PlanAddRecipeView(View):
                 recipe=recipe,
                 plan=plan,
                 order=meal_number,
-                day_name=day
+                day_name=day_name
             )
 
             recipe_plan.save()
