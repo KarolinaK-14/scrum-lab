@@ -54,7 +54,7 @@ class RecipePlan(models.Model):
 class Page(models.Model):
     """
     - title: tytuł strony,
-    - descritption: treść strony,
+    - description: treść strony,
     - slug: unikalny identyfikator tworzony na podstawie tytułu
     """
     title = models.CharField(max_length=255)
