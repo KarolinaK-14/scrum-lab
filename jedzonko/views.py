@@ -101,6 +101,7 @@ class ModifyRecipeView(View):
                                                description=description,
                                                preparation=preparation,
                                                preparation_time=preparation_time)
+            new_recipe.save()
             return redirect('recipe-list')
 
         error = {
