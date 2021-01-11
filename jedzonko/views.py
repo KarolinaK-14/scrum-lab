@@ -6,7 +6,7 @@ import random
 from .models import Recipe, Plan, RecipePlan
 from .enums import DayName
 
-
+#test
 class LandingPageView(View):
     def get(self, request):
         recipe = Recipe.objects.all()
