@@ -76,12 +76,11 @@ class ModifyRecipeView(View):
         preparation_time = request.POST.get("preparation_time")
 
         if name and ingredients and description and preparation and preparation_time:
-            new_recipe = Recipe.objects.create(name=name,
-                                               ingredients=ingredients,
-                                               description=description,
-                                               preparation=preparation,
-                                               preparation_time=preparation_time)
-            new_recipe.save()
+            Recipe.objects.create(name=name,
+                                ingredients=ingredients,
+                                description=description,
+                                preparation=preparation,
+                                preparation_time=preparation_time)
             return redirect('recipe-list')
 
         error = {
