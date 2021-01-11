@@ -1,5 +1,6 @@
 from django.db import models
 from .enums import DayName
+from django.template.defaultfilters import slugify
 
 
 class Recipe(models.Model):
@@ -48,3 +49,18 @@ class RecipePlan(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
     order = models.IntegerField()
     day_name = models.CharField(max_length=16, choices=DayName.choices())
+
+
+class Page(models.Model):
+    """
+    - title: tytuł strony,
+    - description: treść strony,
+    - slug: unikalny identyfikator tworzony na podstawie tytułu
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Page, self).save(*args, **kwargs)
