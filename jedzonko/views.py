@@ -129,7 +129,7 @@ class AddRecipeView(View):
 class PlanListView(View):
     def get(self, request):
         plan_list = Plan.objects.all().order_by("-name", "-created")
-        paginator = Paginator(plan_list, 1)
+        paginator = Paginator(plan_list, 50)
         page = request.GET.get('page')
         plans = paginator.get_page(page)
         return render(request, "app-schedules.html", {"plans": plans})
