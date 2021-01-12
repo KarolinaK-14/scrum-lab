@@ -47,7 +47,7 @@
             <div class="carousel-inner container">
                 {% for recipe in recipes %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <div class="container w-100 d-flex">
+                    <div class="container w-75 center">
                         <div class="carousel-caption d-block">
                             <h1>{% if recipe.name %}{{ recipe.name }}{% else %}{{ empty_info_name}}{% endif %}</h1>
                             <h3>{% if recipe.description %}{{ recipe.description }}{% else %}{{ empty_info_description}}{% endif %}</h3>
