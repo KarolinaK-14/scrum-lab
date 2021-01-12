@@ -66,12 +66,8 @@
             </table>
             {% endfor %}
             {% if no_recipes %}
-                <h3>
-                Do tego planu nie dodano jeszcze żadnych przepisów!
-                </h3>
+                {{ no_recipes }}
             {% endif %}
-
-
     </div>
 </div>
 {% endblock content %}

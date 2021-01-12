@@ -138,7 +138,6 @@ class PlanListView(View):
 class PlanView(View):
     def get(self, request, plan_id):
         plan = get_object_or_404(Plan, pk=plan_id)
-        recipes_exist = RecipePlan.objects.all()
 
         plan_recipes = plan.recipeplan_set.all().order_by("order")
         unique_days = list({i.day_name for i in plan_recipes})
@@ -151,8 +150,8 @@ class PlanView(View):
             "days": sorted_days_name,
             }
 
-        if recipes_exist:
-            context["no_recipes"] = "exist"
+        if not plan_recipes:
+            context["no_recipes"] = "Do tego planu nie dodano jeszcze żadnych przepisów!"
         
         return render(request, "app-details-schedules.html", context)
 
