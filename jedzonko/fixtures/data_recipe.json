@@ -1,0 +1,67 @@
+[
+  {
+    "model": "jedzonko.recipe",
+    "pk": 1,
+    "fields": {
+      "name": "owsianka z owocami i jogurtem",
+      "ingredients": "5 łyżek płatków owsianych, 100 g jogurtu naturalnego, 1 łyżka syropu klonowego, owoce",
+      "description": "Szybka i pyszna owsianka bez gotowania, z owocami i jogurtem naturalnym. Latem najlepsza z sezonowymi owocami, zimą świetna np. z bananem i granatem lub mango.",
+      "preparation": "Płatki owsiane wsypać do miski i zalać wrzącą wodą. Po kilku minutach, gdy płatki napęcznieją i wchłoną wodę, dodać jogurt i wymieszać. Następnie dodać owoce (obrane i pokrojone w razie potrzeby) i polać syropem klonowym.",
+      "created": "2021-01-10 20:00",
+      "updated": "2021-01-10 20:00",
+      "preparation_time": 15
+    }
+  },
+  {
+    "model": "jedzonko.recipe",
+    "pk": 2,
+    "fields": {
+      "name": "sałatka Cezar z kurczakiem",
+      "ingredients": "150 g filetu z kurczaka, 1 łyżeczka oliwy z oliwek, 1/4 główki sałaty rzymskiej, 3 łyżki tartego parmezanu, 5 cm kawałek bagietki, SOS: 2 łyżki majonezu, ząbek czosnku, 1 łyżeczka musztardy, 1 łyżeczka soku z cytryny",
+      "description": "Sałatka Cezar z sałaty rzymskiej z dodatkiem piersi kurczaka, z sosem majonezowym, grzankami i tartym parmezanem.",
+      "preparation": "Mięso oczyścić z błonek i kostek, pokroić, doprawić solą i pieprzem oraz wysmarować oliwą. Rozgrzać patelnię, położyć filety i smażyć przez ok. 4 minuty z każdej strony, w międzyczasie skrapiać mięso dodatkową oliwą. Odłożyć na talerz. Na tę samą patelnię włożyć pokrojoną w kosteczkę bagietkę, zmniejszyć ogień do minimum i smażyć przez ok. 5 minut co chwilę mieszając, aż grzanki będą chrupkie. Odłożyć na talerz. Przygotować sos: czosnek przecisnąć przez praskę i wymieszać z majonezem, musztardą, sokiem z cytryny. Doprawić solą i świeżo zmielonym czarnym pieprzem, wymieszać. Sałatę rzymską opłukać, osuszyć, posiekać, wymieszać z połową sosu. Dodać pokrojonego kurczaka, skropić resztą sosu, posypać tartym parmezanem oraz grzankami.",
+      "created": "2021-01-10 8:00",
+      "updated": "2021-01-10 8:00",
+      "preparation_time": 35
+    }
+  },
+    {
+    "model": "jedzonko.recipe",
+    "pk": 3,
+    "fields": {
+      "name": "Racuchy z jabłkami",
+      "ingredients": "2 jabłka, 200 ml mleka, 1 jajko, 150 g mąki, 1 łyżka cukru, 1/2 łyżeczki sody oczyszczonej",
+      "description": "Szybkie do zrobienia, puszyste racuchy z jabłkami to pomysł na pyszny posiłek dla dzieci i dorosłych.",
+      "preparation": "Mąkę przesiać do miski, dodać cukier oraz sodę oczyszczoną, wymieszać. Dodać mleko i jajko i wymieszać składniki rózgą na jednolitą masę bez grudek. Do ciasta włożyć obrane i pokrojone jabłka, wymieszać. Wykładać po około łyżce ciasta na 1 placek na patelnię i smażyć przez około 1,5 minuty na złoty kolor. Przewrócić na drugą stronę i powtórzyć smażenie. Podawać z cukrem pudrem i dżemem.",
+      "created": "2021-01-08 16:00",
+      "updated": "2021-01-08 16:00",
+      "preparation_time": 30
+    }
+  },
+  {
+    "model": "jedzonko.recipe",
+    "pk": 4,
+    "fields": {
+      "name": "Zupa z papryki",
+      "ingredients": "1 kg czerwonej papryki, 1 łyżka oliwy z oliwek, duża słodka cebula, ząbek czosnku, 1 łyżeczka suszonego majeranku, 1 l rosołu z kurczaka, 1/2 szklanki słodkiej śmietanki, 1 łyżka octu balsamicznego, 2 gałązki rozmarynu",
+      "description": "Delikatna kremowa zupa o pysznym, słodkawym smaku papryki oraz niepowtarzalnej, wyrazistej barwie.",
+      "preparation": "Papryki wkładamy w całości do nagrzanego (220 stopni) piekarnika. Pieczemy, aż skórka nabierze ciemnego koloru. Cebulę i czosnek siekamy. W rondlu rozgrzewamy oliwę, wrzucamy na nią cebulę, czosnek oraz pozostałe przyprawy i smażymy mieszając aż cebula się zeszkli. Wlewamy bulion drobiowy. Upieczoną paprykę obieramy ze skóry, kroimy w kostkę, wrzucamy do wywaru. Wszystko razem zagotowujemy, po czym gotujemy na małym ogniu jeszcze około 25 minut. Po tym czasie zupę zdejmujemy z ognia, miksujemy, dodajemy śmietankę oraz ocet balsamiczny. Doprawiamy do smaku solą i pieprzem.",
+      "created": "2021-01-01 10:00",
+      "updated": "2021-01-01 10:00",
+      "preparation_time": 55
+    }
+  },
+  {
+    "model": "jedzonko.recipe",
+    "pk": 5,
+    "fields": {
+      "name": "Zupa czosnkowa",
+      "ingredients": "2 główki czosnku, 6 ziemniaków, 3 łyżki masła, 1 listek laurowy, 150 g żółtego sera, bagietka",
+      "description": "Rozgrzewająca zupa czosnkowa z dodatkiem sera oraz chrupiącymi grzankami kusi swym smakiem nawet w najchłodniejsze dni.",
+      "preparation": "Masło rozgrzewamy na patelni, wrzucamy pokrojone w kostkę ziemniaki, podsmażamy 5 minut, dodając pokrojone ząbki czosnku. Całość przekładamy do garnka, zalewamy 1 l gorącej wody, dodajemy liść laurowy, sól i pieprz. Gotujemy ok. 30 minut, następnie wyjmujemy liść laurowy i miksujemy zupę. Gotowe :)",
+      "created": "2021-01-03 13:31",
+      "updated": "2021-01-03 13:31",
+      "preparation_time": 45
+    }
+  }
+]
