@@ -157,8 +157,11 @@ class PlanView(View):
         context = {
             "plan": plan,
             "plan_recipes": plan_recipes,
-            "days": sorted_days_name
+            "days": sorted_days_name,
             }
+
+        if not plan_recipes:
+            context["no_recipes"] = "Do tego planu nie dodano jeszcze żadnych przepisów!"
         
         return render(request, "app-details-schedules.html", context)
 
@@ -179,7 +182,7 @@ class AddPlanView(View):
                         description=description,
                         )
             plan.save()
-            return redirect('plan-list')
+            return redirect('plan', plan.id)
 
         error = {
             "error_msg": "wszystkie pola powinny być wypełnione!"
