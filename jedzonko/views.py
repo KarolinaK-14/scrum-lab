@@ -90,11 +90,13 @@ class ModifyRecipeView(View):
         preparation_time = request.POST.get("preparation_time")
 
         if name and ingredients and description and preparation and preparation_time:
-            Recipe.objects.create(name=name,
-                                ingredients=ingredients,
-                                description=description,
-                                preparation=preparation,
-                                preparation_time=preparation_time)
+            recipe = Recipe(name=name,
+                    ingredients=ingredients,
+                    description=description,
+                    preparation=preparation,
+                    preparation_time=preparation_time)
+            recipe.save()
+
             return redirect('recipe-list')
 
         error = {
@@ -169,6 +171,29 @@ class PlanView(View):
         
         return render(request, "app-details-schedules.html", context)
 
+class ModifyPlanView(View):
+    def get(self, request, plan_id):
+        plan = get_object_or_404(Plan, pk=plan_id)
+        return render(request, "app-edit-schedules.html", {"plan": plan})
+
+    def post(self, request, plan_id):
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if name != "" and description != "":
+            plan = Plan.objects.get(pk = 2)
+            plan.name = 'new_name'
+            plan.save()
+            plan = Plan.objects.get(pk= 3)
+            plan.description = 'new_description'
+            plan.save()
+            return redirect('plan', plan_id)
+
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!"
+        }
+
+        return render(request, 'app-edit-schedules.html', error)
 
 class AddPlanView(View):
     """
