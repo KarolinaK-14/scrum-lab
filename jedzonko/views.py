@@ -6,7 +6,7 @@ import random
 from .models import Recipe, Plan, RecipePlan, Page
 from .enums import DayName
 
-
+#test
 class LandingPageView(View):
     def get(self, request):
         recipe = Recipe.objects.all()
@@ -67,6 +67,10 @@ class DashboardView(View):
 class RecipeListView(View):
     def get(self, request):
         recipe_list = Recipe.objects.all().order_by("-votes", "-created")
+        search = request.GET.get("search")
+        if search:
+            search_result = recipe_list.filter(name__icontains=search)
+            return render(request, "app-recipes.html", {"recipes": search_result})
         paginator = Paginator(recipe_list, 50)
         page = request.GET.get('page')
         recipes = paginator.get_page(page)
