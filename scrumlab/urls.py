@@ -20,8 +20,8 @@ from jedzonko import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', v.LandingPageView.as_view(), name='landing-page'),
-    path('<slug:slug>/', v.PageView.as_view(), name='page'),
     path('main/', v.DashboardView.as_view(), name='dashboard'),
+    path('<slug:slug>/', v.PageView.as_view(), name='page'),
     path('recipe/list/', v.RecipeListView.as_view(), name='recipe-list'),
     path('recipe/<int:recipe_id>/', v.RecipeView.as_view(), name='recipe'),
     path('recipe/modify/<int:recipe_id>/', v.ModifyRecipeView.as_view(), name='modify-recipe'),
