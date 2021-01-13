@@ -138,11 +138,11 @@ class AddRecipeView(View):
         description_add = request.POST.get("description_add")
 
         if (
-            name != ""
-            and ingredients != ""
-            and description != ""
-            and preparation_time != ""
-            and description_add != ""
+            name != "" and
+            ingredients != "" and
+            description != "" and
+            preparation_time != "" and
+            description_add != ""
         ):
             recipe = Recipe(
                 name=name,

@@ -35,4 +35,3 @@ urlpatterns = [
     path('recipe/remove/<int:recipe_id>/', v.RecipeRemove.as_view(), name='recipe-remove'),
     path('plan/view/<int:plan_id>/delete/<int:id>/', v.PlanViewDelete.as_view(), name='plan-view-delete'),
 ]
-
