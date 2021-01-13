@@ -170,6 +170,12 @@ class PlanView(View):
         return render(request, "app-details-schedules.html", context)
 
 
+class PlanViewDelete(View):
+    def get(self, request, plan_id, id):
+        RecipePlan.objects.filter(pk=id).delete()
+        return redirect('plan', plan_id)
+
+
 class AddPlanView(View):
     """
         use it to add new Plan
