@@ -78,6 +78,12 @@ class RecipeListView(View):
         return render(request, "app-recipes.html", {"recipes": recipes})
 
 
+class RecipeRemove(View):
+    def get(self, request, recipe_id):
+        Recipe.objects.get(pk=recipe_id).delete()
+        return redirect('recipe-list')
+
+
 class ModifyRecipeView(View):
     def get(self, request, recipe_id):
         recipe = get_object_or_404(Recipe, pk=recipe_id)
@@ -150,6 +156,13 @@ class PlanListView(View):
         page = request.GET.get('page')
         plans = paginator.get_page(page)
         return render(request, "app-schedules.html", {"plans": plans})
+
+
+class PlanRemove(View):
+    def get(self, request, plan_id):
+        Plan.objects.get(pk=plan_id).delete()
+        return redirect('plan-list')
+
 
 
 class PlanView(View):
