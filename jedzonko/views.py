@@ -6,7 +6,8 @@ import random
 from .models import Recipe, Plan, RecipePlan, Page
 from .enums import DayName
 
-#test
+
+# test
 class LandingPageView(View):
     def get(self, request):
         recipe = Recipe.objects.all()
@@ -96,11 +97,13 @@ class ModifyRecipeView(View):
         preparation_time = request.POST.get("preparation_time")
 
         if name and ingredients and description and preparation and preparation_time:
-            Recipe.objects.create(name=name,
-                                ingredients=ingredients,
-                                description=description,
-                                preparation=preparation,
-                                preparation_time=preparation_time)
+            recipe = Recipe(name=name,
+                            ingredients=ingredients,
+                            description=description,
+                            preparation=preparation,
+                            preparation_time=preparation_time)
+            recipe.save()
+
             return redirect('recipe-list')
 
         error = {
@@ -175,18 +178,50 @@ class PlanView(View):
             "plan": plan,
             "plan_recipes": plan_recipes,
             "days": sorted_days_name,
-            }
+        }
 
         if not plan_recipes:
             context["no_recipes"] = "Do tego planu nie dodano jeszcze żadnych przepisów!"
-        
+
         return render(request, "app-details-schedules.html", context)
+
+
+
+class PlanViewDelete(View):
+    def get(self, request, plan_id, id):
+        RecipePlan.objects.filter(pk=id).delete()
+        return redirect('plan', plan_id)
+
+class ModifyPlanView(View):
+    def get(self, request, plan_id):
+        plan = get_object_or_404(Plan, pk=plan_id)
+        return render(request, "app-edit-schedules.html", {"plan": plan})
+
+    def post(self, request, plan_id):
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if name != "" and description != "":
+            plan = Plan.objects.get(pk=plan_id)
+            plan.name = name
+            plan.description = description
+            plan.save()
+            return redirect('plan', plan.id)
+
+        error = {
+            "error_msg": "wszystkie pola powinny być wypełnione!",
+            "plan": Plan.objects.get(pk=plan_id)
+        }
+
+        return render(request, 'app-edit-schedules.html', error)
+
 
 
 class AddPlanView(View):
     """
         use it to add new Plan
     """
+
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
@@ -239,12 +274,12 @@ class RecipeView(View):
 class PlanAddRecipeView(View):
     def get(self, request):
         context = {
-            "plans" : list(Plan.objects.all()),
-            "recipes" : list(Recipe.objects.all()),
+            "plans": list(Plan.objects.all()),
+            "recipes": list(Recipe.objects.all()),
         }
 
         return render(request, "app-schedules-meal-recipe.html", context)
-    
+
     def post(self, request):
         plan_id = request.POST.get('choosePlan')
         meal_name = request.POST.get('name')
@@ -253,7 +288,6 @@ class PlanAddRecipeView(View):
         day = request.POST.get('day')
 
         if plan_id and meal_name and meal_number and recipe_id and day:
-
             plan_id = int(plan_id)
             recipe_id = int(recipe_id)
             meal_number = int(meal_number)
@@ -276,11 +310,10 @@ class PlanAddRecipeView(View):
 
             return redirect('plan', plan_id)
 
-
         context = {
-            "plans" : list(Plan.objects.all()),
-            "recipes" : list(Recipe.objects.all()),
-            "error_msg" : "Wszystkie pola muszą być wypełnione"
+            "plans": list(Plan.objects.all()),
+            "recipes": list(Recipe.objects.all()),
+            "error_msg": "Wszystkie pola muszą być wypełnione"
         }
 
         # context["error_msg"] = f"plan_id: {plan_id}, meal_name: {meal_name}, meal_number: {meal_number}, recipe_id: {recipe_id}, day: {day}"
