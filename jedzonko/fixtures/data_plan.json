@@ -1,0 +1,29 @@
+[
+  {
+    "model": "jedzonko.plan",
+    "pk": 1,
+    "fields": {
+      "name": "Jak u mamy",
+      "description": "Plan zawiera potrawy typowe dla tradycyjnej kuchni polskiej. Jest pysznie jak u mamy :)",
+      "created": "2020-12-12 12:00"
+    }
+  },
+  {
+    "model": "jedzonko.plan",
+    "pk": 2,
+    "fields": {
+      "name": "Wege",
+      "description": "Plan wyklucza ryby i produkty mięsne, które zostały zastąpione wartościowym białkiem roślinnym.",
+      "created": "2020-12-02 22:00"
+    }
+  },
+  {
+    "model": "jedzonko.plan",
+    "pk": 3,
+    "fields": {
+      "name": "Dla dzieci",
+      "description": "Posiłki bogate we wszystkie składniki odżywcze potrzebne w okresie dorastania. Jest smacznie i kolorowo aby sprostać wymaganiom stawianym przez dzieci :)",
+      "created": "2020-10-10 9:19"
+    }
+  }
+]
