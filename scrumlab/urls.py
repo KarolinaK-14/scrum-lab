@@ -28,6 +28,7 @@ urlpatterns = [
     path('recipe/add/', v.AddRecipeView.as_view(), name='add-recipe'),
     path('plan/list/', v.PlanListView.as_view(), name='plan-list'),
     path('plan/<int:plan_id>/', v.PlanView.as_view(), name='plan'),
+    path('plan/modify/<int:plan_id>/', v.ModifyPlanView.as_view(), name='modify-plan'),
     path('plan/add/', v.AddPlanView.as_view(), name='add-plan'),
     path('plan/add-recipe/', v.PlanAddRecipeView.as_view(), name='plan-add-recipe'),
 ]
