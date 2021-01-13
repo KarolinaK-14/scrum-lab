@@ -173,6 +173,12 @@ class PlanView(View):
         return render(request, "app-details-schedules.html", context)
 
 
+
+class PlanViewDelete(View):
+    def get(self, request, plan_id, id):
+        RecipePlan.objects.filter(pk=id).delete()
+        return redirect('plan', plan_id)
+
 class ModifyPlanView(View):
     def get(self, request, plan_id):
         plan = get_object_or_404(Plan, pk=plan_id)
@@ -195,6 +201,7 @@ class ModifyPlanView(View):
         }
 
         return render(request, 'app-edit-schedules.html', error)
+
 
 
 class AddPlanView(View):
