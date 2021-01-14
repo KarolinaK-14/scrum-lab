@@ -27,7 +27,7 @@ jobs:
     - name: Style check
       run: |
         python -m pip install pycodestyle
-        pycodestyle . --ignore=E501 --exclude=migrations
+        pycodestyle . --ignore=E501,W504 --exclude=migrations
     - name: Automated tests
       run: |
         python manage.py test
