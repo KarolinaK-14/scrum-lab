@@ -1,7 +1,7 @@
+import random
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-import random
 from .models import Recipe, Plan, RecipePlan, Page
 from .enums import DayName
 
@@ -196,8 +196,8 @@ class PlanView(View):
 
 
 class PlanViewDelete(View):
-    def get(self, request, plan_id, id):
-        RecipePlan.objects.filter(pk=id).delete()
+    def get(self, request, plan_id, pk):
+        RecipePlan.objects.filter(pk=pk).delete()
         return redirect("plan", plan_id)
 
 
@@ -251,7 +251,7 @@ class RecipeView(View):
     def get(self, request, recipe_id):
         try:
             recipe = Recipe.objects.get(id=recipe_id)
-        except Exception:
+        except Recipe.DoesNotExist:
             return redirect("add-recipe")
         context = {
             "name": recipe.name,

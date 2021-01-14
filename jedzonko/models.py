@@ -28,7 +28,7 @@ class Plan(models.Model):
     - name: nazwa planu,
     - description: opis planu,
     - created: data utworzenia.
-    - recipes - relacja wiele do wielu do modelu przepisu. Wykorzystaj model pośredni recipeplan (through)
+    - recipes - relacja wiele do wielu do modelu przepisu (model pośredni recipeplan)
     """
     name = models.CharField(max_length=255)
     description = models.TextField()
